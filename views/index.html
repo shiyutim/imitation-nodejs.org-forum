@@ -1,0 +1,267 @@
+{{extend './layout.html'}}
+
+{{block 'head'}}
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        background-color: rgb(235, 229, 229);
+    }
+
+    header {
+        background-color: rgb(68, 68, 68);
+        height: 50px;
+    }
+
+    .navbar {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 80%;
+        margin: 0 auto;
+        height: 50px;
+    }
+
+    .navbar-left {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .search {
+        border-radius: 20px;
+        border: none;
+        outline: none;
+
+        background-color: #888;
+        padding-left: 15px;
+        transition: all .3s;
+    }
+
+    .navbar-right ul:nth-child(1) li {
+        /* float: left; */
+        display: inline-block;
+
+        list-style: none;
+    }
+
+    .navbar-list a {
+        padding: 10px 15px;
+
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    .navbar-right a:hover {
+        text-decoration: none;
+
+        color: #fff;
+    }
+
+    .logo {
+        width: 120px;
+        height: 28px;
+
+        margin: 0 10px;
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    .btn {
+        margin-right: 10px;
+        padding: 5px 20px;
+        border-radius: 3px;
+    }
+
+    footer {
+        height: 100px;
+
+        padding: 30px 0 0 30px;
+        margin: 15px 0 0 0;
+
+        background-color: #fff;
+        color: #666;
+    }
+
+
+
+    main {
+        flex: 1;
+        padding: 15px 0 0 0;
+    }
+
+    .main {
+        max-width: 1400px;
+        background-color: #fff;
+
+        margin-right: 305px;
+        border-radius: 3px;
+    }
+
+    /* .container {
+        max-width: 1400px;
+    } */
+    aside {
+        float: right;
+        width: 290px;
+        height: 400px;
+        font-size: 14px;
+    }
+
+    aside::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    aside div:nth-child(2) {
+        height: auto;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .panel {
+        background-color: #fff;
+        margin-bottom: 15px;
+        height: 200px;
+        width: 100%;
+    }
+
+    .cell {
+        width: 100%;
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .userInfo {
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+
+        padding: 0 !important;
+
+        color: #fff !important;
+    }
+
+    .avatar {
+        width: 28px;
+        height: 24px;
+    }
+
+    .icon-xiala {
+        height: 12px;
+        width: 15px;
+    }
+
+    .userCount {
+        display: none;
+        position: absolute;
+
+        width: 120px;
+        background-color: #fff;
+        text-align: left;
+        padding-left: 0;
+    }
+
+    .userCount li {
+        display: block !important;
+        text-align: left;        
+        padding-left: 10px;
+    }
+    .userCount a {
+        color: #000;
+    }
+    .userCount a:hover {
+        color: #007bff;
+    }
+    .userNickname {
+        color: #3498db;
+    }
+</style>
+{{/block}}
+
+
+{{block 'content'}}
+<main>
+    <div class="container">
+        <aside>
+            <div class="panel"></div>
+            <div class="panel">
+                {{if user}}
+                <a href="/publish" class="btn btn-success">发布话题</a>
+                {{else}}
+
+                {{/if}}
+            </div>
+            <div class="panel"></div>
+            <div class="panel"></div>
+        </aside>
+        <div class="main">
+            <div class="inner">
+            </div>
+        </div>
+    </div>
+</main>
+{{/block}}
+
+
+{{block 'script'}}
+<script>
+    // let dataInfo = null
+    $(function () {
+        $('.search').focus(function () {
+            $(this).css('backgroundColor', '#fff')
+        })
+        $('.search').blur(function () {
+            $(this).css('backgroundColor', '#888');
+        })
+
+
+        $('.userInfo').on('click', function () {
+            $('.userCount').toggle()
+        })
+
+        // console.log(user)
+
+        $.ajax({
+            type: 'GET',
+            url: '/userPushInfo',
+            // dataType: 'json',
+            success: function (data) {
+                // console.log(data)
+                if (data.code === 0) {
+                    console.log(data)
+                    for (let i = 0; i < data.message.length; i++) {
+                        let datas = data.message[i]
+                        $('.inner').append(
+                            `<div class="cell">
+                                用户：<span class="userNickname">${datas.nickname}</span>
+                                标题：<span class="userTitle">${datas.title}</span> 
+                                </div>`
+                                // <span class="userContent">内容：${datas.content}</span>
+                                )
+                    }
+                }
+                                if ($('.userNickname').text() == 'undefined') {
+                                    $(this).text() = ''
+                                }
+                                console.log($(this).text())
+            }
+        })
+
+
+
+    })
+</script>
+{{/block}}

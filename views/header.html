@@ -1,0 +1,53 @@
+<header>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="/" class="toMain"><img class="logo" src="../public/img/cnodejs_light.svg" alt=""></a>
+            <form class="bs-example bs-example-form" role="form">
+                <div class="input-group">
+                    <!-- <span class="input-group-addon" id="basic-addon1">@</span> -->
+                    <input type="input" class="search" aria-describedby="basic-addon1">
+                </div>
+            </form>
+        </div>
+        <div class="navbar-right">
+            <ul>
+                <li class="navbar-list">
+                    <a href="/">首页</a>
+                </li>
+                <li class="navbar-list">
+                    <a href="javascript:;">新手入门</a>
+                </li>
+                <li class="navbar-list">
+                    <a href="javascript:;">API</a>
+                </li>
+                <li class="navbar-list">
+                    <a href="javascript:;">关于</a>
+                </li>
+                {{if user}}
+                <li>
+                    <!-- <img class="avatar" src="{{user.avatar}}" alt=""> -->
+                    <!-- <select name="" id="" value="个人资料">
+
+                        <option value="">{{user.nickname}}</option>
+                        <option value=""><a href="/logout">退出</a></option>
+                    </select> -->
+                    <a href="javascript:;" class="userInfo">
+                        {{user.nickname}}
+                        <img src="/public/img/xiala.png" class="icon-xiala" alt="">
+                    </a>
+                    <ol class="userCount">
+                        <li><a href="/userInfo">个人资料</a></li>
+                        <li><a href="/logout" class="logout">退出</a></li>
+                    </ol>
+                </li>
+                {{else}}
+                <li class="navbar-list">
+                    <a href="/login">登录</a>
+                    <a href="/register">注册</a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+
+    </div>
+</header>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: rgb(236, 229, 229);
+        }
+
+        .box {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            width: 28%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        form {
+
+            padding: 20px;
+        }
+
+        .cell {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .cell>span {
+            width: 70px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .subBtn {
+            justify-content: center;
+        }
+
+        .subBtn button {
+            margin: 15px;
+        }
+
+        .tip {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    {{block 'content'}}
+
+    <div class="box">
+        <h2>注册信息</h2>
+        <form class="bs-example bs-example-form" role="form" id="register_form">
+            <div class="input-group cell">
+                <span class="input-group-addon">email:</span>
+                <input type="text" class="form-control" placeholder="请输入邮箱" name="email">
+            </div>
+            <br>
+            <div class="input-group cell">
+                <span class="input-group-addon">nickname:</span>
+                <input type="text" class="form-control" placeholder="请输入名字" name="nickname">
+            </div>
+            <br>
+            <div class="input-group cell">
+                <span class="input-group-addon">password:</span>
+                <input type="text" autocomplete="off" class="form-control" placeholder="请输入密码" name="password">
+            </div>
+
+            <div class="input-group subBtn">
+                <button type="submit" class="btn btn-success" id="submit">确认</button>
+                <button class="btn btn-primary" id="cancel">取消</button>
+            </div>
+            <div class="input-group tip">
+                <span>已有账号？
+                    <a href="/login">点击登陆</a>
+                </span>
+                <span>
+                    <a href="/">返回主页</a>
+                </span>
+            </div>
+        </form>
+    </div>
+
+    {{/block}}
+
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+
+            $('#register_form').on('submit', function (e) {
+                e.preventDefault()
+                let formData = $(this).serialize()
+                $.ajax({
+                    type: 'POST',
+                    url: '/register',
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                        if (data.code === 0) {
+                            window.alert('注册成功，即将跳转')
+                            window.location.href = "/"
+                        } else if (data.code === 1) {
+                            window.alert('邮箱或者昵称已存在')
+                        } else if (data.code === 500) {
+                            window.alert('服务端错误')
+                        }
+                    }
+                })
+            })
+
+            $('#cancel').on('click', function () {
+                window.location.pathname = '/'
+            })
+        })
+    </script>
+</body>
+
+</html>
