@@ -13,6 +13,12 @@
         background-color: rgb(235, 229, 229);
     }
 
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
     header {
         background-color: rgb(68, 68, 68);
         height: 50px;
@@ -124,6 +130,7 @@
         display: block;
         clear: both;
     }
+
     aside div:nth-child(2) {
         height: auto;
         text-align: center;
@@ -176,15 +183,18 @@
 
     .userCount li {
         display: block !important;
-        text-align: left;        
+        text-align: left;
         padding-left: 10px;
     }
+
     .userCount a {
         color: #000;
     }
+
     .userCount a:hover {
         color: #007bff;
     }
+
     .userNickname {
         color: #3498db;
     }
@@ -249,14 +259,14 @@
                                 用户：<span class="userNickname">${datas.nickname}</span>
                                 标题：<span class="userTitle">${datas.title}</span> 
                                 </div>`
-                                // <span class="userContent">内容：${datas.content}</span>
-                                )
+                            // <span class="userContent">内容：${datas.content}</span>
+                        )
                     }
                 }
-                                if ($('.userNickname').text() == 'undefined') {
-                                    $(this).text() = ''
-                                }
-                                console.log($(this).text())
+                if ($('.userNickname').text() == 'undefined') {
+                    $(this).text() = ''
+                }
+                console.log($(this).text())
             }
         })
 
