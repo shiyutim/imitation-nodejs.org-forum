@@ -234,7 +234,7 @@
 
 
 
-        
+
 
         $('#userInfo_form').on('submit', function (e) {
             e.preventDefault()
@@ -248,10 +248,10 @@
                 data: formData,
                 success: function (data) {
                     // console.log(data)
-                    if(data.code === 0) {
+                    if (data.code === 0) {
                         window.alert('更改成功，即将跳转')
                         window.location.href = '/'
-                    }else {
+                    } else {
                         window.alert('更改失败，请稍后再试')
                     }
                 }

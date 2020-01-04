@@ -19,7 +19,10 @@
             left: 50%;
             width: 28%;
             transform: translate(-50%, -50%);
+
             background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
         }
 
         h2 {
@@ -35,23 +38,55 @@
         .cell {
             display: flex;
             flex-flow: row wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
 
+            margin-bottom: 10px;
+        }
+
+        .cell>input {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #666;
+            margin-left: 30px;
+            text-indent: 5px;
+
+            flex: 1;
         }
 
         .cell>span {
-            width: 70px;
             text-align: right;
-            margin-right: 10px;
+            width: 80px;
         }
 
         .subBtn {
-            justify-content: center;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+            margin-top: 30px;
         }
 
-        .subBtn button {
-            margin: 15px;
+        .btn-success {
+            border: none;
+            padding: 10px 30px;
+            background: #2980b9;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            text-decoration: none;
+            color: #000;
+            background: #fff;
+            border: 1px solid #999;
+            padding: 7px 30px;
+            border-radius: 10px;
+        }
+
+        .btn-success:hover,
+        .btn-danger:hover {
+            opacity: .8;
         }
 
         .tip {
@@ -60,7 +95,25 @@
             justify-content: space-between;
             align-items: center;
 
-            margin-top: 15px;
+            margin-top: 45px;
+        }
+
+        .tip>span:first-child a {
+            color: #3498db;
+        }
+
+        .tip>span:first-child a:hover {
+            text-decoration: underline;
+        }
+
+        .tip>span a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .tip>span:last-child a:hover {
+            color: #3498db;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -89,7 +142,7 @@
 
             <div class="input-group subBtn">
                 <button type="submit" class="btn btn-success" id="submit">确认</button>
-                <button class="btn btn-primary" id="cancel">取消</button>
+                <button class="btn btn-danger" id="cancel">取消</button>
             </div>
             <div class="input-group tip">
                 <span>已有账号？
