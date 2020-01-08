@@ -25,6 +25,40 @@
 
 ### 项目结构
 
+```
+│  app.js
+│  list.txt
+│  package.json
+│  README.md
+│  router.js
+│
+├─models
+│      publish.js
+│      user.js
+│
+├─public
+│  ├─css
+│  ├─img
+│  │      avatar-default.png
+│  │      cnodejs_light.svg
+│  │      search.png
+│  │      xiala.png
+│  │
+│  └─js
+└─views
+        404.html
+        footer.html
+        header.html
+        index.html
+        layout.html
+        login.html
+        publish.html
+        register.html
+        userInfo.html
+
+
+```
+
 ### 接口文档
 
 | 路径      | 方法 | get 参数 | post 参数               | 是否需要登录 | 备注             |
